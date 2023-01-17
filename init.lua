@@ -63,6 +63,10 @@ vim.keymap.set('n', '<leader>t', '<Cmd>NvimTreeToggle<CR>', {})
 vim.keymap.set('n', '<leader>-', '<Cmd>NvimTreeResize -2<CR>', {})
 vim.keymap.set('n', '<leader>=', '<Cmd>NvimTreeResize +2<CR>', {})
 
+vim.keymap.set('n', '<leader>hs', '<Cmd>GitGutterStageHunk<CR>', {})
+vim.keymap.set('n', '<leader>hu', '<Cmd>GitGutterUndoHunk<CR>', {})
+vim.keymap.set('n', '<leader>hp', '<Cmd>GitGutterPreviewHunk<CR>', {})
+
 vim.g.coq_settings = {
   auto_start = "shut-up",
 }
@@ -104,5 +108,12 @@ end
 local lsp = require "lspconfig"
 local coq = require "coq"
 
-lsp.gopls.setup(coq.lsp_ensure_capabilities())
-lsp.ansiblels.setup(coq.lsp_ensure_capabilities())
+-- lsp.gopls.setup(coq.lsp_ensure_capabilities())
+-- lsp.ansiblels.setup(coq.lsp_ensure_capabilities())
+lsp["gopls"].setup{
+	on_attach = on_attach,
+}
+lsp["lua-language-server"].setup{
+	on_attach = on_attach,
+}
+
