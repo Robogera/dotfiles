@@ -12,8 +12,7 @@ vim.opt.timeout = false
 vim.opt.ttimeout = true
 vim.opt.ttimeoutlen = 100
 vim.opt.showmatch = true
-vim.opt.scrolloff = 8
--- vim.opt.listchars:append({ tab = '> ' })
+vim.opt.scrolloff = 12
 vim.opt.list = false
 vim.opt.foldenable = false
 vim.opt.wrap = true
@@ -31,7 +30,7 @@ vim.opt.smartcase = true
 vim.opt.matchtime = 1
 vim.opt.autoindent = true
 vim.opt.smartindent = true
-vim.opt.tabstop = 2
+vim.opt.tabstop = 4
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 vim.opt.swapfile = false
@@ -66,18 +65,28 @@ vim.keymap.set('n', '<leader>=', '<Cmd>NvimTreeResize +2<CR>', {})
 vim.keymap.set('n', '<leader>hs', '<Cmd>GitGutterStageHunk<CR>', {})
 vim.keymap.set('n', '<leader>hu', '<Cmd>GitGutterUndoHunk<CR>', {})
 vim.keymap.set('n', '<leader>hp', '<Cmd>GitGutterPreviewHunk<CR>', {})
+vim.keymap.set('n', '<leader>hn', '<Cmd>GitGutterNextHunk<CR>', {})
+vim.keymap.set('n', '<leader>hb', '<Cmd>GitGutterPrevHunk<CR>', {})
+
 
 vim.g.coq_settings = {
   auto_start = "shut-up",
 }
 
+vim.g.gitgutter_grep = "rg"
+vim.g.gitgutter_sign_added = "A"
+vim.g.gitgutter_sign_modified = "M"
+vim.g.gitgutter_sign_removed = "R"
+vim.g.gitgutter_sign_removed_first_line = "R^"
+vim.g.gitgutter_sign_modified_removed = "MR"
+
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 local opts = { noremap=true, silent=true }
-vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, opts)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
-vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, opts)
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -102,18 +111,13 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
   vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-  vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
+  vim.keymap.set('n', '<leader>f', function() vim.lsp.buf.format { async = true } end, bufopts)
 end
 
 local lsp = require "lspconfig"
 local coq = require "coq"
 
--- lsp.gopls.setup(coq.lsp_ensure_capabilities())
--- lsp.ansiblels.setup(coq.lsp_ensure_capabilities())
-lsp["gopls"].setup{
-	on_attach = on_attach,
-}
-lsp["lua-language-server"].setup{
-	on_attach = on_attach,
-}
+lsp.gopls.setup(coq.lsp_ensure_capabilities())
+lsp.ansiblels.setup(coq.lsp_ensure_capabilities())
+lsp.clangd.setup(coq.lsp_ensure_capabilities())
 
