@@ -122,7 +122,7 @@ return require( 'packer' ).startup( function( use )
           -- Text object
           map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
         end,
-        signs = {
+        signs = { -- TODO: highlight staged hunks
           add          = { text = '│' },
           change       = { text = '│' },
           delete       = { text = '_' },
