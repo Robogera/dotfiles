@@ -2,9 +2,6 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.opt.termguicolors = true
 vim.cmd.colorscheme "catppuccin-macchiato"
--- Painting the tab background black
--- vim.cmd(':hi TabLineFill term=bold cterm=bold ctermbg=0')
--- vim.cmd(':hi SignColumn term=bold cterm=bold ctermbg=0')
 vim.opt.encoding = 'utf-8'
 vim.opt.backspace = 'indent,eol,start'
 vim.opt.startofline = true
