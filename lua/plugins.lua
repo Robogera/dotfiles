@@ -81,15 +81,15 @@ return require( 'packer' ).startup( function( use )
   -------------------------
   -- L S P --
   -------------------------
-  use {
-    "neovim/nvim-lspconfig",
-  }
-  use({
-    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-    config = function()
-      require("lsp_lines").setup()
-    end,
-  })
+ use {
+   "neovim/nvim-lspconfig",
+ }
+  -- use({
+  --   "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+  --   config = function()
+  --     require("lsp_lines").setup()
+  --   end,
+  -- })
   --------------
   -- GITSIGNS --
   --------------
@@ -136,12 +136,12 @@ return require( 'packer' ).startup( function( use )
           map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
         end,
         signs = { -- TODO: highlight staged hunks
-          add          = { text = '│' },
-          change       = { text = '│' },
-          delete       = { text = '_' },
-          topdelete    = { text = '‾' },
-          changedelete = { text = '~' },
-          untracked    = { text = '┆' },
+          add          = { text = '▌' },
+          change       = { text = '▌' },
+          delete       = { text = '▁' },
+          topdelete    = { text = '▔' },
+          changedelete = { text = '▙' },
+          untracked    = { text = '▞' },
         },
         signcolumn = true,  -- Toggle with `:Gitsigns toggle_signs`
         numhl      = true, -- Toggle with `:Gitsigns toggle_numhl`

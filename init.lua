@@ -41,6 +41,10 @@ vim.diagnostic.config({
   virtual_text = false,
 })
 
+vim.o.updatetime = 250
+vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
+
+
 vim.g.mapleader = ' '
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
@@ -65,17 +69,33 @@ vim.keymap.set('n', '<leader>hp', '<Cmd>GitGutterPreviewHunk<CR>', {})
 vim.keymap.set('n', '<leader>hn', '<Cmd>GitGutterNextHunk<CR>', {})
 vim.keymap.set('n', '<leader>hb', '<Cmd>GitGutterPrevHunk<CR>', {})
 
+vim.fn.sign_define(
+  "DiagnosticSignError",
+  { texthl = "DiagnosticSignError", text = "", numhl = "DiagnosticSignError" }
+)
+vim.fn.sign_define(
+  "DiagnosticSignWarning",
+  { texthl = "DiagnosticSignWarning", text = "", numhl = "DiagnosticSignWarning" }
+)
+vim.fn.sign_define(
+  "DiagnosticSignHint",
+  { texthl = "DiagnosticSignHint", text = "", numhl = "DiagnosticSignHint" }
+)
+vim.fn.sign_define(
+  "DiagnosticSignInformation",
+  { texthl = "DiagnosticSignInformation", text = "", numhl = "DiagnosticSignInformation" }
+)
 
 vim.g.coq_settings = {
   auto_start = "shut-up",
 }
 
-vim.g.gitgutter_grep = "rg"
-vim.g.gitgutter_sign_added = "A"
-vim.g.gitgutter_sign_modified = "M"
-vim.g.gitgutter_sign_removed = "R"
-vim.g.gitgutter_sign_removed_first_line = "R^"
-vim.g.gitgutter_sign_modified_removed = "MR"
+-- vim.g.gitgutter_grep = "rg"
+-- vim.g.gitgutter_sign_added = "A"
+-- vim.g.gitgutter_sign_modified = "M"
+-- vim.g.gitgutter_sign_removed = "R"
+-- vim.g.gitgutter_sign_removed_first_line = "R^"
+-- vim.g.gitgutter_sign_modified_removed = "MR"
 
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
