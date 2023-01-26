@@ -70,10 +70,10 @@ vim.keymap.set('n', '<leader>hn', '<Cmd>GitGutterNextHunk<CR>', {})
 vim.keymap.set('n', '<leader>hb', '<Cmd>GitGutterPrevHunk<CR>', {})
 
 local diagnosticSigns = {
-    Error = "",
-    Warning = "",
-    Hint = "",
-    Information = "",
+    Error = "",
+    Warning = "",
+    Hint = "",
+    Information = "",
 }
 
 for severity, sign in pairs(diagnosticSigns) do
@@ -84,13 +84,6 @@ end
 vim.g.coq_settings = {
   auto_start = "shut-up",
 }
-
--- vim.g.gitgutter_grep = "rg"
--- vim.g.gitgutter_sign_added = "A"
--- vim.g.gitgutter_sign_modified = "M"
--- vim.g.gitgutter_sign_removed = "R"
--- vim.g.gitgutter_sign_removed_first_line = "R^"
--- vim.g.gitgutter_sign_modified_removed = "MR"
 
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
