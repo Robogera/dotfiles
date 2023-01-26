@@ -69,22 +69,17 @@ vim.keymap.set('n', '<leader>hp', '<Cmd>GitGutterPreviewHunk<CR>', {})
 vim.keymap.set('n', '<leader>hn', '<Cmd>GitGutterNextHunk<CR>', {})
 vim.keymap.set('n', '<leader>hb', '<Cmd>GitGutterPrevHunk<CR>', {})
 
-vim.fn.sign_define(
-  "DiagnosticSignError",
-  { texthl = "DiagnosticSignError", text = "", numhl = "DiagnosticSignError" }
-)
-vim.fn.sign_define(
-  "DiagnosticSignWarning",
-  { texthl = "DiagnosticSignWarning", text = "", numhl = "DiagnosticSignWarning" }
-)
-vim.fn.sign_define(
-  "DiagnosticSignHint",
-  { texthl = "DiagnosticSignHint", text = "", numhl = "DiagnosticSignHint" }
-)
-vim.fn.sign_define(
-  "DiagnosticSignInformation",
-  { texthl = "DiagnosticSignInformation", text = "", numhl = "DiagnosticSignInformation" }
-)
+local diagnosticSigns = {
+    Error = "",
+    Warning = "",
+    Hint = "",
+    Information = "",
+}
+
+for severity, sign in pairs(diagnosticSigns) do
+    local hlGroup = "DiagnosticSign" .. severity
+    vim.fn.sign_define(hlGroup, {texthl = hlGroup, numhl = hlGroup, text = sign})
+end
 
 vim.g.coq_settings = {
   auto_start = "shut-up",
